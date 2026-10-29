@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" role="img" aria-label="Glossa mark">
+  <title>Glossa</title>
+  <rect width="128" height="128" fill="#E8E6E1"/>
+  <!-- Engraved specimen G: single open aperture, slight thick/thin -->
+  <path
+    fill="none"
+    stroke="#1C1F24"
+    stroke-width="9"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+    d="M88 42
+       C84 30 72 24 58 24
+       C38 24 24 40 24 64
+       C24 88 38 104 58 104
+       C72 104 84 98 90 88
+       L90 68
+       L62 68"
+  />
+  <path
+    fill="none"
+    stroke="#1C1F24"
+    stroke-width="5.5"
+    stroke-linecap="round"
+    d="M88 42 C86 34 78 28 68 26"
+  />
+</svg>

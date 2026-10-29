@@ -4,6 +4,8 @@
 
 Offline-first linguistics CLI/TUI (`glossa`). Stage 0–1: workspaces, import, positional index, and KWIC.
 
+Brand assets (icon, logo, letterhead, GitHub social preview, terminal banner): [`brand/`](./brand/).
+
 ## Install (dev)
 
 ```bash
@@ -35,6 +37,10 @@ glossa kwic 'Rab+it' --regex --corpus alice
 # Machine-readable envelope (every command)
 glossa --version --json
 glossa kwic Alice --corpus alice --json
+
+# Branding (quiet by default; compact banner on request)
+glossa about
+GLOSSA_BANNER=1 glossa
 ```
 
 JSON results use a provenance envelope:

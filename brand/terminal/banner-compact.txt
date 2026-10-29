@@ -1,0 +1,7 @@
+   ██████╗
+  ██╔════╝
+  ██║  ███╗
+  ██║   ██║
+  ╚██████╔╝
+   ╚═════╝
+  glossa · offline-first linguistics CLI/TUI

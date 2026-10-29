@@ -7,3 +7,4 @@
 /flamegraph.svg
 /criterion
 crates/**/criterion
+.superpowers/
