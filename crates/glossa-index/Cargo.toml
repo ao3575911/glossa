@@ -1,0 +1,31 @@
+[package]
+name = "glossa-index"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+rust-version.workspace = true
+description = "Columnar positional corpus index and KWIC"
+repository.workspace = true
+
+[dependencies]
+byteorder = { workspace = true }
+fst = { workspace = true }
+glossa-io = { workspace = true }
+glossa-nlp = { workspace = true }
+hex = { workspace = true }
+memmap2 = { workspace = true }
+regex = { workspace = true }
+serde = { workspace = true }
+serde_json = { workspace = true }
+sha2 = { workspace = true }
+thiserror = { workspace = true }
+
+[dev-dependencies]
+criterion = { workspace = true }
+indexmap = { workspace = true }
+proptest = { workspace = true }
+tempfile = { workspace = true }
+
+[[bench]]
+name = "index_kwic"
+harness = false

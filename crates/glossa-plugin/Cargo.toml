@@ -1,0 +1,10 @@
+[package]
+name = "glossa-plugin"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+rust-version.workspace = true
+description = "Plugin host (Stage 5 stub)"
+repository.workspace = true
+
+[dependencies]
