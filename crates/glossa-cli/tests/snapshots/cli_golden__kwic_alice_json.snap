@@ -1,0 +1,102 @@
+---
+source: crates/glossa-cli/tests/cli_golden.rs
+expression: kwic_json
+---
+{
+  "command": "kwic",
+  "corpus_hash": "<hash>",
+  "data": {
+    "corpus": "alice",
+    "hit_count": 5,
+    "hits": [
+      {
+        "doc": "alice_excerpt.txt",
+        "left": [
+          "alas",
+          "for",
+          "poor"
+        ],
+        "match_text": "Alice",
+        "position": 2160,
+        "right": [
+          "!",
+          "when",
+          "she"
+        ]
+      },
+      {
+        "doc": "alice_excerpt.txt",
+        "left": [
+          ",",
+          "\"",
+          "thought"
+        ],
+        "match_text": "Alice",
+        "position": 71,
+        "right": [
+          "\"",
+          "without",
+          "pictures"
+        ]
+      },
+      {
+        "doc": "alice_excerpt.txt",
+        "left": [
+          "\"",
+          "thought",
+          "poor"
+        ],
+        "match_text": "Alice",
+        "position": 1580,
+        "right": [
+          ",",
+          "\"",
+          "it"
+        ]
+      },
+      {
+        "doc": "alice_excerpt.txt",
+        "left": [
+          ",",
+          "\"",
+          "said"
+        ],
+        "match_text": "Alice",
+        "position": 1722,
+        "right": [
+          ",",
+          ")",
+          "and"
+        ]
+      },
+      {
+        "doc": "alice_excerpt.txt",
+        "left": [
+          "\"",
+          "thought",
+          "poor"
+        ],
+        "match_text": "Alice",
+        "position": 2362,
+        "right": [
+          ",",
+          "\"",
+          "to"
+        ]
+      }
+    ],
+    "query": "Alice"
+  },
+  "duration_ms": 0,
+  "glossa_version": "0.1.0",
+  "model_hashes": {},
+  "params": {
+    "context": 3,
+    "corpus": "alice",
+    "limit": 5,
+    "query": "Alice",
+    "regex": false,
+    "sort": "R1"
+  },
+  "started_at": "<ts>"
+}

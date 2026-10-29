@@ -1,0 +1,16 @@
+[package]
+name = "glossa-nlp"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+rust-version.workspace = true
+description = "Rule-based tokeniser and sentence splitter"
+repository.workspace = true
+
+[dependencies]
+thiserror = { workspace = true }
+unicode-normalization = { workspace = true }
+unicode-segmentation = { workspace = true }
+
+[dev-dependencies]
+proptest = { workspace = true }

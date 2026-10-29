@@ -1,0 +1,23 @@
+---
+source: crates/glossa-cli/tests/cli_golden.rs
+expression: init_json
+---
+{
+  "command": "init",
+  "corpus_hash": null,
+  "data": {
+    "config": "<config>",
+    "db": "<db>",
+    "name": "fixture",
+    "root": "<root>",
+    "session_log": "<log>"
+  },
+  "duration_ms": 0,
+  "glossa_version": "0.1.0",
+  "model_hashes": {},
+  "params": {
+    "dir": ".",
+    "name": "fixture"
+  },
+  "started_at": "<ts>"
+}
