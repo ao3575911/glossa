@@ -8,7 +8,12 @@ no-default-features = false
 [advisories]
 yanked = "warn"
 # Ignore unused advisory ids deliberately with rationale in PRs, not empty defaults.
-ignore = []
+ignore = [
+    # ttf-parser is unmaintained (no known vulnerability). It is pulled in
+    # transitively by pdf-extract for font metrics; no maintained pdf-extract
+    # release drops it yet. Revisit when pdf-extract migrates to skrifa.
+    { id = "RUSTSEC-2026-0192", reason = "unmaintained transitive dep of pdf-extract; no vulnerability" },
+]
 
 [licenses]
 version = 2
