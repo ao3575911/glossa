@@ -50,7 +50,7 @@ unicode-normalization = "0.1"
 chardetng = "1.0"
 encoding_rs = "0.8"
 zip = { version = "9", default-features = false, features = ["deflate"] }
-quick-xml = "0.41"
+quick-xml = "0.42"
 pdf-extract = "0.12"
 csv = "1"
 regex = "1"
