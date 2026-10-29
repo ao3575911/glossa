@@ -1,4 +1,14 @@
-//! Glossa TUI — ratatui screens land in Stage 4.
+//! Glossa full-screen TUI (ratatui + crossterm).
 
-/// Placeholder so the crate compiles as a workspace member.
-pub const STAGE: &str = "stub";
+mod app;
+mod theme;
+
+pub use app::{run_terminal, App, RunConfig, Tab};
+
+/// Run the TUI (alternate screen, raw mode).
+pub fn run(config: RunConfig) -> anyhow::Result<()> {
+    run_terminal(config)
+}
+
+#[cfg(test)]
+mod tests;

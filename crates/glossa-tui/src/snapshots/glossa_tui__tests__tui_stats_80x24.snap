@@ -1,0 +1,28 @@
+---
+source: crates/glossa-tui/src/tests.rs
+expression: buffer_string(&terminal)
+---
+┌ glossa 0.1.0 ────────────────────────────────────────────────────────────────┐
+│ Workspace │ Concordance │ Stats │ Session                                    │
+└──────────────────────────────────────────────────────────────────────────────┘
+┌ Statistics (stub) ───────────────────────────────────────────────────────────┐
+│Frequency · Collocations · Keyness                                            │
+│                                                                              │
+│Not yet available in the CLI (Stage 2).                                       │
+│                                                                              │
+│When `glossa freq`, `glossa colloc`, and `glossa keyness` ship,               │
+│this tab will call the same in-process handlers as the CLI.                   │
+│                                                                              │
+│                                                                              │
+│                                                                              │
+│                                                                              │
+│                                                                              │
+│                                                                              │
+│                                                                              │
+│                                                                              │
+│                                                                              │
+└──────────────────────────────────────────────────────────────────────────────┘
+q quit · ? help · 1-4 tabs · Workspace: i init a add · Concordance: / Enter s so
+                                                                                
+                                                                                
+No workspace — press i or :init <dir> to create one

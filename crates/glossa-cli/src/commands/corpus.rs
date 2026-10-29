@@ -1,24 +1,12 @@
 use crate::output::{self, param_str, param_u64, params_from, EmitArgs};
-use anyhow::{bail, Result};
+use anyhow::Result;
 use chrono::Utc;
+use glossa_commands::corpus as corpus_cmd;
 use glossa_core::OutputMode;
-use glossa_index::build_corpus_index;
-use glossa_io::{apply_metadata, import_path, load_metadata_csv};
-use glossa_workspace::{CorpusRecord, Workspace};
+use glossa_workspace::CorpusRecord;
 use serde::Serialize;
 use std::path::PathBuf;
 use std::time::Instant;
-
-#[derive(Debug, Serialize)]
-struct AddData {
-    name: String,
-    path: String,
-    token_count: u64,
-    doc_count: u64,
-    sentence_count: u64,
-    corpus_hash: String,
-    documents: Vec<String>,
-}
 
 #[derive(Debug, Serialize)]
 struct LsData {
@@ -36,7 +24,7 @@ struct RmData {
 }
 
 pub fn add(
-    ws: &Workspace,
+    ws: &glossa_workspace::Workspace,
     path: PathBuf,
     name: Option<String>,
     meta: Option<PathBuf>,
@@ -44,63 +32,11 @@ pub fn add(
 ) -> Result<()> {
     let started = Instant::now();
     let started_at = Utc::now();
-
-    let corpus_name = name.unwrap_or_else(|| {
-        path.file_stem()
-            .and_then(|s| s.to_str())
-            .unwrap_or("corpus")
-            .to_string()
-    });
-
-    if ws.get_corpus(&corpus_name).is_ok() {
-        bail!("corpus already exists: {corpus_name} (remove it first with `glossa corpus rm`)");
-    }
-
-    let mut batch = import_path(&path)?;
-    if let Some(meta_path) = &meta {
-        let meta_map = load_metadata_csv(meta_path)?;
-        apply_metadata(&mut batch, &meta_map);
-    }
-    if batch.documents.is_empty() {
-        bail!("no supported documents found at {}", path.display());
-    }
-
-    let corpus_dir = ws.corpora_dir().join(&corpus_name);
-    std::fs::create_dir_all(&corpus_dir)?;
-    let stats = build_corpus_index(&batch, &corpus_dir)?;
-
-    let record = CorpusRecord {
-        name: corpus_name.clone(),
-        path: corpus_dir.display().to_string(),
-        token_count: stats.token_count,
-        doc_count: stats.doc_count,
-        sentence_count: stats.sentence_count,
-        corpus_hash: stats.corpus_hash.clone(),
-        created_at: Utc::now(),
-    };
-    ws.upsert_corpus(&record)?;
-
-    for doc in &batch.documents {
-        let meta_map: serde_json::Map<String, serde_json::Value> = doc
-            .metadata
-            .iter()
-            .map(|(k, v)| (k.clone(), v.clone()))
-            .collect();
-        ws.insert_document(&corpus_name, &doc.filename, &meta_map, 0)?;
-    }
-
-    let data = AddData {
-        name: corpus_name,
-        path: corpus_dir.display().to_string(),
-        token_count: stats.token_count,
-        doc_count: stats.doc_count,
-        sentence_count: stats.sentence_count,
-        corpus_hash: stats.corpus_hash.clone(),
-        documents: batch.documents.iter().map(|d| d.filename.clone()).collect(),
-    };
+    let path_display = path.display().to_string();
+    let data = corpus_cmd::add(ws, path, name, meta)?;
 
     let params = params_from([
-        param_str("path", path.display().to_string()),
+        param_str("path", path_display),
         param_str("name", data.name.clone()),
         param_u64("token_count", data.token_count),
     ]);
@@ -112,7 +48,7 @@ pub fn add(
             params,
             started_at,
             duration: started.elapsed(),
-            corpus_hash: Some(stats.corpus_hash),
+            corpus_hash: Some(data.corpus_hash.clone()),
             data: &data,
         },
         |d| {
@@ -128,10 +64,10 @@ pub fn add(
     Ok(())
 }
 
-pub fn ls(ws: &Workspace, mode: OutputMode) -> Result<()> {
+pub fn ls(ws: &glossa_workspace::Workspace, mode: OutputMode) -> Result<()> {
     let started = Instant::now();
     let started_at = Utc::now();
-    let corpora = ws.list_corpora()?;
+    let corpora = corpus_cmd::list(ws)?;
     let data = LsData { corpora };
 
     output::emit(
@@ -160,10 +96,10 @@ pub fn ls(ws: &Workspace, mode: OutputMode) -> Result<()> {
     Ok(())
 }
 
-pub fn info(ws: &Workspace, name: &str, mode: OutputMode) -> Result<()> {
+pub fn info(ws: &glossa_workspace::Workspace, name: &str, mode: OutputMode) -> Result<()> {
     let started = Instant::now();
     let started_at = Utc::now();
-    let corpus = ws.get_corpus(name)?;
+    let corpus = corpus_cmd::info(ws, name)?;
     let hash = corpus.corpus_hash.clone();
     let data = InfoData { corpus };
 
@@ -191,10 +127,10 @@ pub fn info(ws: &Workspace, name: &str, mode: OutputMode) -> Result<()> {
     Ok(())
 }
 
-pub fn rm(ws: &Workspace, name: &str, mode: OutputMode) -> Result<()> {
+pub fn rm(ws: &glossa_workspace::Workspace, name: &str, mode: OutputMode) -> Result<()> {
     let started = Instant::now();
     let started_at = Utc::now();
-    let removed = ws.remove_corpus(name)?;
+    let removed = corpus_cmd::remove(ws, name)?;
     let hash = removed.corpus_hash.clone();
     let data = RmData { removed };
 

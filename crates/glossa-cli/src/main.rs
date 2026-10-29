@@ -6,8 +6,10 @@ use anyhow::{Context, Result};
 use chrono::Utc;
 use clap::{Parser, Subcommand};
 use glossa_core::{resolve_output_mode, OutputMode};
+use glossa_tui::RunConfig;
 use glossa_workspace::{SessionEvent, Workspace};
 use serde_json::json;
+use std::io::IsTerminal;
 use std::path::PathBuf;
 use std::process::ExitCode;
 use std::time::Instant;
@@ -80,6 +82,8 @@ enum Commands {
     },
     /// Show Glossa branding and project pointers
     About,
+    /// Open the full-screen TUI
+    Tui,
 }
 
 #[derive(Debug, Subcommand)]
@@ -151,12 +155,15 @@ fn run() -> Result<ExitCode> {
         return Ok(ExitCode::SUCCESS);
     }
 
-    // Bare `glossa` would open TUI in Stage 4; for now show a short banner.
     let Some(command) = cli.command else {
+        if should_launch_tui(mode) {
+            launch_tui(cli.workspace, no_color)?;
+            return Ok(ExitCode::SUCCESS);
+        }
         let data = json!({
             "name": "glossa",
             "version": glossa_core::GLOSSA_VERSION,
-            "message": "TUI opens here in Stage 4; use --help for commands",
+            "message": "Use `glossa tui` or set GLOSSA_NO_TUI=0; use --help for commands",
         });
         output::emit(
             output::EmitArgs {
@@ -216,7 +223,28 @@ fn command_name(cmd: &Commands) -> &'static str {
         },
         Commands::Kwic { .. } => "kwic",
         Commands::About => "about",
+        Commands::Tui => "tui",
     }
+}
+
+fn should_launch_tui(mode: OutputMode) -> bool {
+    if mode != OutputMode::Human {
+        return false;
+    }
+    if std::env::var_os("GLOSSA_NO_TUI").is_some() {
+        return false;
+    }
+    if !std::io::stdout().is_terminal() {
+        return false;
+    }
+    true
+}
+
+fn launch_tui(workspace: Option<PathBuf>, no_color: bool) -> Result<()> {
+    glossa_tui::run(RunConfig {
+        workspace_hint: workspace,
+        no_color,
+    })
 }
 
 fn open_workspace_optional(explicit: &Option<PathBuf>) -> Result<Workspace> {
@@ -274,6 +302,10 @@ fn dispatch(
                     mode,
                 },
             )?;
+            Ok(ExitCode::SUCCESS)
+        }
+        Commands::Tui => {
+            launch_tui(workspace.clone(), no_color)?;
             Ok(ExitCode::SUCCESS)
         }
         Commands::About => {
