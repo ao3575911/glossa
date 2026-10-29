@@ -1,0 +1,3 @@
+# Definition
+
+Glossa is an offline-first, single-binary command-line tool with a full-screen terminal UI (TUI) that bundles corpus, morphosyntax, phonetics, fieldwork, statistics, historical, typological and psycholinguistic tools in one keyboard-driven workspace. It is built for linguists, field workers, researchers, translators, advanced learners and NLP developers who today stitch together AntConc, Praat, ELAN, Python scripts and websites. Every tool runs both interactively in the TUI and as a pipeable `glossa` subcommand that emits JSON, and every result records the version and parameters that produced it.
