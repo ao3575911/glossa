@@ -1,0 +1,30 @@
+title: "[idea] "
+labels: ["type:feature", "status:triage"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Share an idea for Glossa. Concrete feature work should become a tracked
+        issue once the proposal has enough shape.
+  - type: textarea
+    id: idea
+    attributes:
+      label: Idea
+      description: What should Glossa make easier for linguists?
+    validations:
+      required: true
+  - type: textarea
+    id: context
+    attributes:
+      label: Context
+      description: Research workflow, corpus type, or competing tools.
+  - type: dropdown
+    id: interest
+    attributes:
+      label: Interest in contributing
+      options:
+        - Happy to discuss only
+        - Willing to prototype
+        - Willing to own an implementation PR
+    validations:
+      required: true

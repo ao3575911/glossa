@@ -1,0 +1,23 @@
+title: "[q] "
+labels: ["type:question"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Ask the community. For confirmed defects, open a **Bug report** issue instead.
+  - type: textarea
+    id: question
+    attributes:
+      label: Question
+    validations:
+      required: true
+  - type: textarea
+    id: tried
+    attributes:
+      label: What you already tried
+      description: Commands, docs pages, or error messages.
+  - type: input
+    id: version
+    attributes:
+      label: Glossa version
+      placeholder: 0.1.0 / commit SHA

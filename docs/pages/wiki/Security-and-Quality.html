@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Security and Quality — Glossa</title>
+<link rel="stylesheet" href="../styles.css" />
+</head>
+<body>
+<div class="sheet">
+<p class="brand"><a href="../index.html" style="color:inherit;text-decoration:none">glossa</a></p>
+<h1>Security and quality</h1>
+<h2>Reporting</h2>
+<p>Use private vulnerability reporting — see <a href="https://github.com/ao3575911/glossa/blob/main/SECURITY.md">SECURITY.md</a>. Never file public issues for exploitable defects.</p>
+<h2>Automated gates</h2>
+<table>
+<tr><th>Workflow</th><th>Purpose</th></tr>
+<tr><td><code>CI</code></td><td>fmt, clippy <code>-D warnings</code>, tests (Ubuntu / macOS / Windows), bench smoke</td></tr>
+<tr><td><code>Security and quality</code></td><td>cargo-deny, cargo-audit, CodeQL</td></tr>
+<tr><td><code>Labels</code></td><td>Sync <code>.github/labels.yml</code></td></tr>
+<tr><td><code>PR labeler</code></td><td>Path → <code>area:*</code> / <code>type:*</code> labels</td></tr>
+<tr><td><code>Pages</code></td><td>Deploy <code>docs/pages</code> + wiki mirror</td></tr>
+<tr><td><code>Stale</code></td><td>Nudge inactive issues/PRs</td></tr>
+</table>
+<p>Policy files: <code>deny.toml</code>, <code>.github/codeql/codeql-config.yml</code>, <code>rustfmt.toml</code>, <code>clippy.toml</code>.</p>
+<h2>Local checks</h2>
+<pre><code>cargo fmt --all -- --check
+cargo clippy --workspace --all-targets -- -D warnings
+cargo test --workspace
+cargo deny check
+cargo audit</code></pre>
+<footer><p><a href="Home.html">Wiki home</a> · <a href="../index.html">Site</a></p></footer>
+</div>
+</body>
+</html>

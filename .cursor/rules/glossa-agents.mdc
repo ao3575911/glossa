@@ -1,0 +1,15 @@
+---
+description: Glossa agent conventions for Rust linguistics CLI work
+alwaysApply: true
+---
+
+# Glossa agent rules
+
+- Treat `docs/06-PRD.md` and `docs/07-build-spec.md` as product/tech source of truth.
+- Stay within Stage 0–1 unless the task explicitly expands scope.
+- No `unwrap()` in library crates; use `thiserror` in libs and `anyhow` in `glossa-cli`.
+- Keep CLI/JSON output ordering deterministic; preserve the provenance envelope.
+- Record intentional spec deviations in `docs/decisions/NNNN-title.md`.
+- Prefer existing labels (`type:*`, `area:*`) and issue/PR templates under `.github/`.
+- Never commit secrets, tokens, or private corpus text.
+- Verify with `cargo fmt --check`, `clippy -D warnings`, and `cargo test --workspace`.

@@ -1,0 +1,66 @@
+name: Feature request
+description: Propose a new capability or enhancement.
+title: "[feature] "
+labels: ["type:feature", "status:triage"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Align proposals with [docs/06-PRD.md](../../docs/06-PRD.md) and
+        [docs/07-build-spec.md](../../docs/07-build-spec.md) when possible.
+  - type: textarea
+    id: problem
+    attributes:
+      label: Problem
+      description: What linguistics workflow is awkward or impossible today?
+    validations:
+      required: true
+  - type: textarea
+    id: proposal
+    attributes:
+      label: Proposal
+      description: What should Glossa do? Include CLI/TUI sketches if relevant.
+    validations:
+      required: true
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: Alternatives considered
+      description: Other tools, flags, or approaches you evaluated.
+  - type: dropdown
+    id: area
+    attributes:
+      label: Primary area
+      options:
+        - cli
+        - core
+        - io
+        - index
+        - nlp
+        - workspace
+        - tui
+        - stats
+        - plugin
+        - brand
+        - docs
+        - cross-cutting
+    validations:
+      required: true
+  - type: dropdown
+    id: stage
+    attributes:
+      label: Spec stage (if known)
+      options:
+        - Unsure
+        - Stage 0 — Foundations
+        - Stage 1 — Import + index + KWIC
+        - Later stage / out of current roadmap
+  - type: checkboxes
+    id: checklist
+    attributes:
+      label: Checklist
+      options:
+        - label: I checked Discussions for related ideas.
+          required: true
+        - label: I am willing to help implement or review (optional).
+          required: false

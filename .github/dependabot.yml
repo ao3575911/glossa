@@ -1,0 +1,33 @@
+version: 2
+updates:
+  - package-ecosystem: cargo
+    directory: "/"
+    schedule:
+      interval: weekly
+      day: monday
+      time: "06:00"
+      timezone: "Australia/Perth"
+    open-pull-requests-limit: 10
+    labels:
+      - pr:dependencies
+      - type:chore
+      - area:ci
+    commit-message:
+      prefix: "deps"
+      include: "scope"
+
+  - package-ecosystem: github-actions
+    directory: "/"
+    schedule:
+      interval: weekly
+      day: monday
+      time: "06:30"
+      timezone: "Australia/Perth"
+    open-pull-requests-limit: 5
+    labels:
+      - pr:dependencies
+      - type:ci
+      - area:ci
+    commit-message:
+      prefix: "ci"
+      include: "scope"

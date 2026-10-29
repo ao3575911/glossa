@@ -1,0 +1,11 @@
+blank_issues_enabled: false
+contact_links:
+  - name: Security vulnerability
+    url: https://github.com/ao3575911/glossa/security/advisories/new
+    about: Report security issues privately via GitHub Security Advisories (see SECURITY.md).
+  - name: Questions and discussion
+    url: https://github.com/ao3575911/glossa/discussions
+    about: Ask questions, share ideas, and talk with other linguists and contributors.
+  - name: Documentation and wiki
+    url: https://github.com/ao3575911/glossa/wiki
+    about: Usage guides, architecture notes, and contributor handbook.

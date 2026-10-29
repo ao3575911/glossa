@@ -1,0 +1,18 @@
+title: "[show] "
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Share a corpus workflow, plugin idea, teaching use, or screenshot of Glossa
+        in practice. Keep personal or copyrighted corpus text out of posts.
+  - type: textarea
+    id: story
+    attributes:
+      label: What you built or learned
+    validations:
+      required: true
+  - type: textarea
+    id: how
+    attributes:
+      label: How you used Glossa
+      description: Commands, workspace layout, or TUI notes (optional).

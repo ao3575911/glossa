@@ -8,3 +8,7 @@
 /criterion
 crates/**/criterion
 .superpowers/
+.idea/
+.vscode/
+*.swp
+*~

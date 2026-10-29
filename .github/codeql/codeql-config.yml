@@ -1,0 +1,9 @@
+name: Glossa CodeQL
+paths:
+  - crates
+paths-ignore:
+  - tests
+  - "**/benches/**"
+  - "**/snapshots/**"
+queries:
+  - uses: security-and-quality

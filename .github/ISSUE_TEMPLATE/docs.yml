@@ -1,0 +1,33 @@
+name: Documentation
+description: Fix or improve docs, wiki, or examples.
+title: "[docs] "
+labels: ["type:docs", "area:docs", "status:triage"]
+body:
+  - type: dropdown
+    id: kind
+    attributes:
+      label: Kind
+      options:
+        - Typo / clarity
+        - Missing guide
+        - Wrong or outdated information
+        - Wiki page
+        - GitHub Pages site
+        - API / CLI reference
+        - ADR / decision record
+    validations:
+      required: true
+  - type: textarea
+    id: location
+    attributes:
+      label: Location
+      description: File path, wiki page, or URL.
+      placeholder: docs/07-build-spec.md §4 / wiki/Home
+    validations:
+      required: true
+  - type: textarea
+    id: suggestion
+    attributes:
+      label: Suggested change
+    validations:
+      required: true

@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Getting Started — Glossa</title>
+<link rel="stylesheet" href="../styles.css" />
+</head>
+<body>
+<div class="sheet">
+<p class="brand"><a href="../index.html" style="color:inherit;text-decoration:none">glossa</a></p>
+<h1>Getting started</h1>
+<h2>Install (dev)</h2>
+<pre><code>cargo install --path crates/glossa-cli
+# or
+cargo run -p glossa-cli -- --help</code></pre>
+<h2>Quick start</h2>
+<pre><code>glossa init my-project
+cd my-project
+
+glossa corpus add path/to/texts --name demo
+glossa corpus ls
+glossa kwic Alice --corpus demo --sort R1 --context 5 --limit 20
+
+glossa --version --json
+GLOSSA_BANNER=1 glossa about</code></pre>
+<h2>Workspace layout</h2>
+<pre><code>glossa.toml
+.glossa/
+  workspace.db
+  session.jsonl
+  corpora/&lt;name&gt;/</code></pre>
+<p>Every command appends one line to <code>.glossa/session.jsonl</code>. JSON output uses a provenance envelope (<code>glossa_version</code>, <code>command</code>, <code>params</code>, hashes, timings, <code>data</code>).</p>
+<h2>Next</h2>
+<ul class="links">
+<li><a href="Architecture">Architecture</a></li>
+<li><a href="Contributing-Handbook">Contributing handbook</a></li>
+<li>Product PRD: <code>docs/06-PRD.md</code></li>
+</ul>
+<footer><p><a href="Home.html">Wiki home</a> · <a href="../index.html">Site</a></p></footer>
+</div>
+</body>
+</html>

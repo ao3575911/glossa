@@ -1,0 +1,58 @@
+# Desired repository settings (document + apply via github/settings app or manually).
+# https://github.com/repository-settings/app
+
+repository:
+  name: glossa
+  description: "Glossa: every linguist's research tool, in one fast terminal workspace."
+  homepage: https://glossa.tools
+  topics: >-
+    rust, cli, tui, ratatui, linguistics, computational-linguistics,
+    corpus-linguistics, concordance, nlp, universal-dependencies
+  private: false
+  has_issues: true
+  has_projects: true
+  has_wiki: true
+  has_downloads: true
+  has_discussions: true
+  default_branch: main
+  allow_squash_merge: true
+  allow_merge_commit: false
+  allow_rebase_merge: true
+  allow_auto_merge: true
+  delete_branch_on_merge: true
+  allow_update_branch: true
+  squash_merge_commit_title: PR_TITLE
+  squash_merge_commit_message: PR_BODY
+  web_commit_signoff_required: false
+  security_and_analysis:
+    secret_scanning:
+      status: enabled
+    secret_scanning_push_protection:
+      status: enabled
+    dependabot_security_updates:
+      status: enabled
+    private_vulnerability_reporting:
+      status: enabled
+
+branches:
+  - name: main
+    protection:
+      required_pull_request_reviews:
+        required_approving_review_count: 1
+        dismiss_stale_reviews: true
+        require_code_owner_reviews: false
+      required_status_checks:
+        strict: true
+        contexts:
+          - "ubuntu-latest"
+          - "macos-latest"
+          - "windows-latest"
+          - "Quality gate"
+          - "cargo-deny"
+          - "cargo-audit"
+      enforce_admins: false
+      required_linear_history: true
+      restrictions: null
+      required_conversation_resolution: true
+
+# Labels are owned by .github/labels.yml (Labels workflow), not duplicated here.
