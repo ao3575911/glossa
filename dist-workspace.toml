@@ -1,0 +1,20 @@
+[workspace]
+members = ["cargo:."]
+
+# Config for cargo-dist release builds (Stage 0).
+[dist]
+cargo-dist-version = "0.28.0"
+ci = "github"
+installers = ["shell", "powershell"]
+targets = [
+    "aarch64-apple-darwin",
+    "x86_64-apple-darwin",
+    "x86_64-unknown-linux-gnu",
+    "aarch64-unknown-linux-gnu",
+    "x86_64-pc-windows-msvc",
+]
+install-updater = false
+pr-run-mode = "plan"
+
+[dist.github-custom-runners]
+global = "ubuntu-latest"

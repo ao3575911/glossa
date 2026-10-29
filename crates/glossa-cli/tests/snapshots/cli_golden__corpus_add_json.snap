@@ -1,0 +1,28 @@
+---
+source: crates/glossa-cli/tests/cli_golden.rs
+expression: add_json
+---
+{
+  "command": "corpus add",
+  "corpus_hash": "<hash>",
+  "data": {
+    "corpus_hash": "<hash>",
+    "doc_count": 1,
+    "documents": [
+      "alice_excerpt.txt"
+    ],
+    "name": "alice",
+    "path": "<path>",
+    "sentence_count": 84,
+    "token_count": 2607
+  },
+  "duration_ms": 0,
+  "glossa_version": "0.1.0",
+  "model_hashes": {},
+  "params": {
+    "name": "alice",
+    "path": "<fixture>",
+    "token_count": 2607
+  },
+  "started_at": "<ts>"
+}
