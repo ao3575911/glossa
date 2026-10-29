@@ -1,0 +1,28 @@
+---
+source: crates/glossa-tui/src/tests.rs
+expression: buffer_string(&terminal)
+---
+┌ glossa 0.1.0 ────────────────────────────────────────────────────────────────┐
+│ Workspace │ Concordance │ Stats │ Session                                    │
+└──────────────────────────────────────────────────────────────────────────────┘
+query: Alice | corpus: - | sort: none | ctx: 5 | limit: 100 | regex: false      
+                                                                                
+┌ Hits (0) ────────────────────────────────────────────────────────────────────┐
+│Left                          Node             Right                          │
+│                                                                              │
+│                                                                              │
+│                                                                              │
+│                                                                              │
+│                                                                              │
+│                                                                              │
+└──────────────────────────────────────────────────────────────────────────────┘
+┌ Context ─────────────────────────────────────────────────────────────────────┐
+│                                                                              │
+│                                                                              │
+│                                                                              │
+│                                                                              │
+└──────────────────────────────────────────────────────────────────────────────┘
+q quit · ? help · 1-4 tabs · Workspace: i init a add · Concordance: / Enter s so
+                                                                                
+                                                                                
+No workspace — press i or :init <dir> to create one

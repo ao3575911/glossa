@@ -47,6 +47,9 @@ jobs:
       - name: Test
         run: cargo test --workspace
 
+      - name: TUI (ratatui snapshots)
+        run: cargo test -p glossa-tui
+
       - name: Bench (smoke)
         if: runner.os != 'Windows'
         run: cargo bench -p glossa-index --bench index_kwic -- --sample-size 10 --warm-up-time 1 --measurement-time 3

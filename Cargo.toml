@@ -2,6 +2,7 @@
 resolver = "2"
 members = [
     "crates/glossa-cli",
+    "crates/glossa-commands",
     "crates/glossa-core",
     "crates/glossa-io",
     "crates/glossa-index",
@@ -24,6 +25,7 @@ authors = ["Glossa contributors"]
 description = "Offline-first linguistics CLI/TUI"
 
 [workspace.dependencies]
+glossa-commands = { path = "crates/glossa-commands", version = "0.1.0" }
 glossa-core = { path = "crates/glossa-core", version = "0.1.0" }
 glossa-io = { path = "crates/glossa-io", version = "0.1.0" }
 glossa-index = { path = "crates/glossa-index", version = "0.1.0" }

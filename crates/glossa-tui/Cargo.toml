@@ -4,7 +4,21 @@ version.workspace = true
 edition.workspace = true
 license.workspace = true
 rust-version.workspace = true
-description = "Glossa TUI (Stage 4 stub)"
+description = "Glossa full-screen TUI (ratatui)"
 repository.workspace = true
 
 [dependencies]
+anyhow = { workspace = true }
+chrono = { workspace = true }
+crossterm = "0.28"
+glossa-commands = { workspace = true }
+glossa-core = { workspace = true }
+glossa-index = { workspace = true }
+glossa-workspace = { workspace = true }
+ratatui = "0.29"
+serde = { workspace = true }
+serde_json = { workspace = true }
+
+[dev-dependencies]
+insta = { workspace = true }
+tempfile = { workspace = true }

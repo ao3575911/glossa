@@ -1,0 +1,17 @@
+[package]
+name = "glossa-commands"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+rust-version.workspace = true
+description = "Shared Glossa command logic for CLI and TUI"
+repository.workspace = true
+
+[dependencies]
+anyhow = { workspace = true }
+chrono = { workspace = true }
+glossa-index = { workspace = true }
+glossa-io = { workspace = true }
+glossa-workspace = { workspace = true }
+serde = { workspace = true }
+serde_json = { workspace = true }

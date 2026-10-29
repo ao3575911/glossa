@@ -2,7 +2,7 @@
 
 **Glossa: every linguist's research tool, in one fast terminal workspace.**
 
-Offline-first linguistics CLI/TUI (`glossa`). Stage 0–1: workspaces, import, positional index, and KWIC.
+Offline-first linguistics CLI/TUI (`glossa`). Stage 0–1: workspaces, import, positional index, and KWIC; Stage 4 MVP: ratatui full-screen UI.
 
 | | |
 | --- | --- |
@@ -50,6 +50,18 @@ glossa about
 GLOSSA_BANNER=1 glossa
 ```
 
+## Terminal UI
+
+From a workspace directory (or with `--workspace`), run the full-screen interface:
+
+```bash
+glossa tui
+# or simply (interactive terminal):
+glossa
+```
+
+Keyboard highlights: `Tab` / `1`–`4` switch panels (workspace, concordance, stats stub, session log); `i` / `:init` create a workspace; `a` / `:add <path>` import a corpus; `/` then query + `Enter` for KWIC; `j`/`k` move rows; `s` cycle sort (L1/R1/R2); `Ctrl+e` export KWIC CSV; `q` quit. Set `GLOSSA_NO_TUI=1` to disable auto-launch on bare `glossa`. Colours follow `brand/tokens.json`; honour `NO_COLOR`.
+
 JSON results use a provenance envelope:
 
 ```json
@@ -82,12 +94,14 @@ glossa.toml
 | Crate | Role |
 |---|---|
 | `glossa-cli` | Binary (`glossa`) |
+| `glossa-commands` | Shared init / corpus / KWIC logic (CLI + TUI) |
+| `glossa-tui` | Ratatui full-screen UI |
 | `glossa-core` | Result envelope / output mode |
 | `glossa-workspace` | `init`, SQLite, session log |
 | `glossa-io` | Importers |
 | `glossa-nlp` | UAX #29 tokeniser + sentence split |
 | `glossa-index` | Positional index + KWIC |
-| `glossa-tui` / `glossa-stats` / `glossa-plugin` | Stubs (later stages) |
+| `glossa-stats` / `glossa-plugin` | Stubs (later stages) |
 
 ## Development
 

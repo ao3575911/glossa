@@ -1,0 +1,28 @@
+---
+source: crates/glossa-tui/src/tests.rs
+expression: buffer_string(&terminal)
+---
+┌ glossa 0.1.0 ────────────────────────────────────────────────────────────────┐
+│ Workspace │ Concordance │ Stats │ Session                                    │
+└──────────────────────────────────────────────────────────────────────────────┘
+┌ Session log ─────────────────────────────────────────────────────────────────┐
+│(empty — commands append to .glossa/session.jsonl)                            │
+│                                                                              │
+│                                                                              │
+│                                                                              │
+│                                                                              │
+│                                                                              │
+│                                                                              │
+│                                                                              │
+│                                                                              │
+│                                                                              │
+│                                                                              │
+│                                                                              │
+│                                                                              │
+│                                                                              │
+│                                                                              │
+└──────────────────────────────────────────────────────────────────────────────┘
+q quit · ? help · 1-4 tabs · Workspace: i init a add · Concordance: / Enter s so
+                                                                                
+                                                                                
+No workspace — press i or :init <dir> to create one
