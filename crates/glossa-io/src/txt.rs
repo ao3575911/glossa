@@ -1,6 +1,6 @@
 use crate::error::IoResult;
 use crate::types::{Document, DocumentKind};
-use chardetng::EncodingDetector;
+use chardetng::{EncodingDetector, Iso2022JpDetection, Utf8Detection};
 use encoding_rs::Encoding;
 use indexmap::IndexMap;
 use std::fs;
@@ -8,9 +8,9 @@ use std::path::Path;
 
 /// Detect encoding with chardetng and decode with encoding_rs.
 pub fn decode_bytes(bytes: &[u8]) -> IoResult<String> {
-    let mut detector = EncodingDetector::new();
+    let mut detector = EncodingDetector::new(Iso2022JpDetection::Deny);
     detector.feed(bytes, true);
-    let encoding: &'static Encoding = detector.guess(None, true);
+    let encoding: &'static Encoding = detector.guess(None, Utf8Detection::Allow);
     let (cow, _enc, had_errors) = encoding.decode(bytes);
     if had_errors {
         // Fall back to lossy UTF-8 rather than failing hard on mixed corpora.
