@@ -41,7 +41,7 @@ fn extract_docx_text(xml: &str) -> IoResult<String> {
     loop {
         match reader.read_event_into(&mut buf) {
             Ok(Event::Start(e)) | Ok(Event::Empty(e)) => {
-                let local = String::from_utf8_lossy(e.local_name().as_ref()).into_owned();
+                let local = e.local_name().as_ref().to_string();
                 match local.as_str() {
                     "t" => in_t = true,
                     "tab" => out.push('\t'),
@@ -51,7 +51,7 @@ fn extract_docx_text(xml: &str) -> IoResult<String> {
                 }
             }
             Ok(Event::End(e)) => {
-                let local = String::from_utf8_lossy(e.local_name().as_ref()).into_owned();
+                let local = e.local_name().as_ref().to_string();
                 if local == "t" {
                     in_t = false;
                 }
@@ -61,7 +61,7 @@ fn extract_docx_text(xml: &str) -> IoResult<String> {
             }
             Ok(Event::Text(t)) => {
                 if in_t {
-                    let decoded = t.decode().map_err(|e| IoError::Xml(e.to_string()))?;
+                    let decoded = t.xml10_content();
                     out.push_str(&decoded);
                 }
             }
@@ -73,7 +73,7 @@ fn extract_docx_text(xml: &str) -> IoResult<String> {
                     {
                         out.push(ch);
                     } else {
-                        let name = r.decode().map_err(|e| IoError::Xml(e.to_string()))?;
+                        let name = r.xml10_content();
                         if let Some(v) = quick_xml::escape::resolve_predefined_entity(&name) {
                             out.push_str(v);
                         }
