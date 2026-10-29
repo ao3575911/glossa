@@ -1,0 +1,53 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 595 842" role="img" aria-label="Glossa letterhead">
+  <title>Glossa letterhead</title>
+  <!-- A4 @ 72dpi: 595×842 -->
+  <rect width="595" height="842" fill="#E8E6E1"/>
+  <g transform="translate(48,40) scale(0.45)">
+    <path
+      fill="none"
+      stroke="#1C1F24"
+      stroke-width="9"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+      d="M88 42 C84 30 72 24 58 24 C38 24 24 40 24 64 C24 88 38 104 58 104 C72 104 84 98 90 88 L90 68 L62 68"
+    />
+    <path fill="none" stroke="#1C1F24" stroke-width="5.5" stroke-linecap="round" d="M88 42 C86 34 78 28 68 26"/>
+  </g>
+  <text
+    x="118" y="72"
+    font-family="'IBM Plex Mono', ui-monospace, monospace"
+    font-size="22"
+    font-weight="500"
+    letter-spacing="0.12em"
+    fill="#1C1F24"
+  >glossa</text>
+  <text
+    x="118" y="94"
+    font-family="'IBM Plex Mono', ui-monospace, monospace"
+    font-size="10"
+    fill="#5C6370"
+  >every linguist's research tool</text>
+  <line x1="48" y1="118" x2="547" y2="118" stroke="#9AA1AB" stroke-width="1"/>
+  <!-- body guides (non-printing intent: decorative for mock) -->
+  <g stroke="#C5C8CE" stroke-width="0.75" opacity="0.55">
+    <line x1="48" y1="180" x2="547" y2="180"/>
+    <line x1="48" y1="208" x2="547" y2="208"/>
+    <line x1="48" y1="236" x2="547" y2="236"/>
+    <line x1="48" y1="264" x2="547" y2="264"/>
+    <line x1="48" y1="292" x2="400" y2="292"/>
+  </g>
+  <line x1="48" y1="780" x2="547" y2="780" stroke="#9AA1AB" stroke-width="1"/>
+  <text
+    x="48" y="802"
+    font-family="'IBM Plex Mono', ui-monospace, monospace"
+    font-size="9"
+    fill="#5C6370"
+  >glossa.tools</text>
+  <text
+    x="547" y="802"
+    text-anchor="end"
+    font-family="'IBM Plex Mono', ui-monospace, monospace"
+    font-size="9"
+    fill="#5C6370"
+  >offline-first linguistics</text>
+</svg>

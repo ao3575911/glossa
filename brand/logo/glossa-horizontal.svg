@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 420 96" role="img" aria-label="Glossa">
+  <title>glossa</title>
+  <rect width="420" height="96" fill="#E8E6E1"/>
+  <g transform="translate(8,8) scale(0.625)">
+    <path
+      fill="none"
+      stroke="#1C1F24"
+      stroke-width="9"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+      d="M88 42 C84 30 72 24 58 24 C38 24 24 40 24 64 C24 88 38 104 58 104 C72 104 84 98 90 88 L90 68 L62 68"
+    />
+    <path fill="none" stroke="#1C1F24" stroke-width="5.5" stroke-linecap="round" d="M88 42 C86 34 78 28 68 26"/>
+  </g>
+  <text
+    x="104" y="58"
+    font-family="'IBM Plex Mono', ui-monospace, monospace"
+    font-size="36"
+    font-weight="500"
+    letter-spacing="0.12em"
+    fill="#1C1F24"
+  >glossa</text>
+</svg>

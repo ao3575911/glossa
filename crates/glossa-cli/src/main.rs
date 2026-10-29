@@ -1,3 +1,4 @@
+mod brand;
 mod commands;
 mod output;
 
@@ -77,6 +78,8 @@ enum Commands {
         #[arg(long, default_value_t = 100)]
         limit: usize,
     },
+    /// Show Glossa branding and project pointers
+    About,
 }
 
 #[derive(Debug, Subcommand)]
@@ -112,7 +115,7 @@ fn main() -> ExitCode {
 fn run() -> Result<ExitCode> {
     let cli = Cli::parse();
     let mode = resolve_output_mode(cli.json, cli.plain);
-    let _no_color = cli.no_color || std::env::var_os("NO_COLOR").is_some();
+    let no_color = cli.no_color || std::env::var_os("NO_COLOR").is_some();
     let started = Instant::now();
     let started_at = Utc::now();
 
@@ -166,6 +169,10 @@ fn run() -> Result<ExitCode> {
                 data: &data,
             },
             |d| {
+                if brand::banner_env_enabled() {
+                    brand::print_banner(brand::use_color(no_color));
+                    println!();
+                }
                 println!("glossa {}", d["version"].as_str().unwrap_or("?"));
                 println!("{}", d["message"].as_str().unwrap_or(""));
             },
@@ -176,7 +183,7 @@ fn run() -> Result<ExitCode> {
     let cmd_name = command_name(&command);
     let mut log_ok = true;
     let mut log_err: Option<String> = None;
-    let result = dispatch(&cli.workspace, mode, command);
+    let result = dispatch(&cli.workspace, mode, no_color, command);
 
     if let Err(ref e) = result {
         log_ok = false;
@@ -208,6 +215,7 @@ fn command_name(cmd: &Commands) -> &'static str {
             CorpusCmd::Rm { .. } => "corpus rm",
         },
         Commands::Kwic { .. } => "kwic",
+        Commands::About => "about",
     }
 }
 
@@ -222,7 +230,12 @@ fn require_workspace(explicit: &Option<PathBuf>) -> Result<Workspace> {
     open_workspace_optional(explicit).context("workspace not found; run `glossa init` first")
 }
 
-fn dispatch(workspace: &Option<PathBuf>, mode: OutputMode, command: Commands) -> Result<ExitCode> {
+fn dispatch(
+    workspace: &Option<PathBuf>,
+    mode: OutputMode,
+    no_color: bool,
+    command: Commands,
+) -> Result<ExitCode> {
     match command {
         Commands::Init { dir, name } => {
             commands::init::run(dir, name, mode)?;
@@ -259,6 +272,40 @@ fn dispatch(workspace: &Option<PathBuf>, mode: OutputMode, command: Commands) ->
                     context,
                     limit,
                     mode,
+                },
+            )?;
+            Ok(ExitCode::SUCCESS)
+        }
+        Commands::About => {
+            let data = json!({
+                "name": "glossa",
+                "version": glossa_core::GLOSSA_VERSION,
+                "homepage": "https://glossa.tools",
+                "repository": "https://github.com/glossa-tools/glossa",
+                "tagline": "every linguist's research tool, in one fast terminal workspace",
+            });
+            let started_at = Utc::now();
+            let started = Instant::now();
+            output::emit(
+                output::EmitArgs {
+                    mode,
+                    command: "about",
+                    params: Default::default(),
+                    started_at,
+                    duration: started.elapsed(),
+                    corpus_hash: None,
+                    data: &data,
+                },
+                |d| {
+                    brand::print_banner(brand::use_color(no_color));
+                    println!();
+                    println!(
+                        "glossa {}",
+                        d["version"].as_str().unwrap_or("?")
+                    );
+                    println!("{}", d["homepage"].as_str().unwrap_or(""));
+                    println!("{}", d["repository"].as_str().unwrap_or(""));
+                    println!("brand assets: brand/ (see brand/README.md)");
                 },
             )?;
             Ok(ExitCode::SUCCESS)
