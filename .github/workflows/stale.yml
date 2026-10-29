@@ -1,0 +1,39 @@
+name: Stale
+
+on:
+  schedule:
+    - cron: "0 7 * * 1"
+  workflow_dispatch:
+
+permissions:
+  issues: write
+  pull-requests: write
+
+concurrency:
+  group: stale-${{ github.repository }}
+  cancel-in-progress: true
+
+jobs:
+  stale:
+    name: Mark and close stale items
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/stale@5bef64f19d7facfb25b37b414482c7164d639639 # v9.1.0
+        with:
+          days-before-issue-stale: 90
+          days-before-issue-close: 30
+          days-before-pr-stale: 60
+          days-before-pr-close: 14
+          stale-issue-label: status:stale
+          stale-pr-label: status:stale
+          exempt-issue-labels: priority:critical,priority:high,status:in-progress,status:blocked,status:accepted
+          exempt-pr-labels: pr:do-not-merge,pr:ready
+          stale-issue-message: >
+            This issue has been inactive for 90 days. Please comment to keep it open,
+            or it will close in 30 days. Feel free to reopen later with fresh context.
+          stale-pr-message: >
+            This pull request has been inactive for 60 days. Please update it or mark
+            it ready; it will close in 14 days if there is no activity.
+          close-issue-message: Closed for inactivity. Reopen if this is still relevant.
+          close-pr-message: Closed for inactivity. Open a new PR from an updated branch if needed.
+          operations-per-run: 50

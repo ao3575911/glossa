@@ -1,0 +1,161 @@
+# Canonical label taxonomy for Glossa.
+# Synced by .github/workflows/labels.yml (crazy-max/ghaction-github-labeler).
+# Issue and PR templates apply these by name — keep names stable.
+
+# --- Type ---
+- name: type:bug
+  color: "D73A4A"
+  description: Defect — something is broken or incorrect
+- name: type:feature
+  color: "0E8A16"
+  description: New capability or enhancement
+- name: type:docs
+  color: "0075CA"
+  description: Documentation, wiki, or examples
+- name: type:chore
+  color: "FEF2C0"
+  description: Maintenance, tooling, or repo hygiene
+- name: type:refactor
+  color: "C5DEF5"
+  description: Internal change with no intended behaviour change
+- name: type:performance
+  color: "FBCA04"
+  description: Speed, memory, or scalability
+- name: type:security
+  color: "B60205"
+  description: Security vulnerability or hardening
+- name: type:question
+  color: "D876E3"
+  description: Clarification request (prefer Discussions)
+- name: type:ci
+  color: "5319E7"
+  description: Continuous integration or release pipeline
+
+# --- Area ---
+- name: area:cli
+  color: "1D76DB"
+  description: glossa-cli binary and command UX
+- name: area:core
+  color: "1D76DB"
+  description: glossa-core envelope and shared types
+- name: area:io
+  color: "1D76DB"
+  description: Importers and format parsers
+- name: area:index
+  color: "1D76DB"
+  description: Positional index and KWIC
+- name: area:nlp
+  color: "1D76DB"
+  description: Tokenisation, tagging, models
+- name: area:workspace
+  color: "1D76DB"
+  description: Workspace, SQLite, session log
+- name: area:tui
+  color: "1D76DB"
+  description: Terminal UI (ratatui)
+- name: area:stats
+  color: "1D76DB"
+  description: Association measures and statistics
+- name: area:plugin
+  color: "1D76DB"
+  description: Plugin host and extensions
+- name: area:brand
+  color: "1D76DB"
+  description: Brand assets and terminal banner
+- name: area:docs
+  color: "1D76DB"
+  description: Product docs, wiki, and pages
+- name: area:ci
+  color: "1D76DB"
+  description: GitHub Actions and release automation
+- name: area:security
+  color: "1D76DB"
+  description: Security policy, audits, supply chain
+
+# --- Priority ---
+- name: priority:critical
+  color: "B60205"
+  description: Blocks release or corrupts data
+- name: priority:high
+  color: "D93F0B"
+  description: Should land in the next milestone
+- name: priority:medium
+  color: "FBCA04"
+  description: Important but not urgent
+- name: priority:low
+  color: "0E8A16"
+  description: Nice to have / backlog
+
+# --- Status ---
+- name: status:triage
+  color: "EDEDED"
+  description: Needs triage
+- name: status:accepted
+  color: "C2E0C6"
+  description: Accepted for work
+- name: status:blocked
+  color: "BFDADC"
+  description: Waiting on an external dependency
+- name: status:in-progress
+  color: "0052CC"
+  description: Actively being worked
+- name: status:needs-info
+  color: "D4C5F9"
+  description: Waiting on reporter information
+- name: status:wontfix
+  color: "FFFFFF"
+  description: Will not be addressed
+- name: status:stale
+  color: "EDEDED"
+  description: Inactive — may close without updates
+
+# --- Size (for planning) ---
+- name: size:XS
+  color: "C5F015"
+  description: Trivial change
+- name: size:S
+  color: "C5F015"
+  description: Small, focused change
+- name: size:M
+  color: "C5F015"
+  description: Moderate effort
+- name: size:L
+  color: "C5F015"
+  description: Large effort
+- name: size:XL
+  color: "C5F015"
+  description: Multi-PR or milestone-scale
+
+# --- Community ---
+- name: good first issue
+  color: "7057FF"
+  description: Good for newcomers
+- name: help wanted
+  color: "008672"
+  description: Extra attention is needed
+- name: accessibility
+  color: "F143AB"
+  description: Barrier affecting people with disabilities
+- name: duplicate
+  color: "CFD3D7"
+  description: Duplicate of another issue or PR
+- name: invalid
+  color: "E4E669"
+  description: Not actionable as filed
+
+# --- Pull requests ---
+- name: pr:breaking
+  color: "B60205"
+  description: Breaking change for users or API consumers
+- name: pr:dependencies
+  color: "0366D6"
+  description: Dependency update
+- name: pr:ready
+  color: "0E8A16"
+  description: Ready for review
+- name: pr:draft
+  color: "EDEDED"
+  description: Work in progress
+- name: pr:do-not-merge
+  color: "B60205"
+  description: Must not be merged yet

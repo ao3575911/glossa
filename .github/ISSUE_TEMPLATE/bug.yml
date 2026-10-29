@@ -1,0 +1,92 @@
+name: Bug report
+description: Something is broken or behaves incorrectly.
+title: "[bug] "
+labels: ["type:bug", "status:triage"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for helping improve Glossa. Please fill in every section you can.
+        Security-sensitive reports belong in [SECURITY.md](../SECURITY.md), not here.
+  - type: textarea
+    id: summary
+    attributes:
+      label: Summary
+      description: One or two sentences describing the defect.
+      placeholder: KWIC --sort R1 returns unsorted rows when --regex is set.
+    validations:
+      required: true
+  - type: textarea
+    id: reproduce
+    attributes:
+      label: Steps to reproduce
+      description: Minimal commands or actions that trigger the bug.
+      placeholder: |
+        glossa init /tmp/repro && cd /tmp/repro
+        glossa corpus add path/to/file.txt --name demo
+        glossa kwic Alice --corpus demo --regex --sort R1
+      render: bash
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected behaviour
+    validations:
+      required: true
+  - type: textarea
+    id: actual
+    attributes:
+      label: Actual behaviour
+      description: Include relevant stdout/stderr. Redact personal corpus text if needed.
+    validations:
+      required: true
+  - type: dropdown
+    id: area
+    attributes:
+      label: Area
+      multiple: true
+      options:
+        - cli
+        - core
+        - io
+        - index
+        - nlp
+        - workspace
+        - tui
+        - stats
+        - plugin
+        - brand
+        - docs
+        - ci
+        - unknown
+    validations:
+      required: true
+  - type: input
+    id: version
+    attributes:
+      label: Glossa version
+      description: Output of `glossa --version` (or commit SHA if building from source).
+      placeholder: 0.1.0
+    validations:
+      required: true
+  - type: dropdown
+    id: os
+    attributes:
+      label: Operating system
+      options:
+        - Linux
+        - macOS
+        - Windows
+        - Other
+    validations:
+      required: true
+  - type: checkboxes
+    id: checklist
+    attributes:
+      label: Checklist
+      options:
+        - label: I searched existing issues and Discussions for duplicates.
+          required: true
+        - label: This is not a security vulnerability (those go through SECURITY.md).
+          required: true

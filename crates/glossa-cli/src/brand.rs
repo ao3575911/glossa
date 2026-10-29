@@ -24,12 +24,8 @@ pub fn print_banner(color: bool) {
     }
     if color {
         println!("{GRAPHITE}  glossa{RESET}");
-        println!(
-            "{MUTED}  every linguist's research tool,{RESET}"
-        );
-        println!(
-            "{MUTED}  in one fast terminal workspace{RESET}"
-        );
+        println!("{MUTED}  every linguist's research tool,{RESET}");
+        println!("{MUTED}  in one fast terminal workspace{RESET}");
         println!("{IRON_BLUE}  offline · reproducible · CLI/TUI{RESET}");
     } else {
         println!("  glossa");

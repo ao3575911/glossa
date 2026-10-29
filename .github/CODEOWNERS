@@ -1,0 +1,10 @@
+# Default reviewers for Glossa. Update handles as maintainers join.
+
+* @ao3575911
+
+/.github/ @ao3575911
+/SECURITY.md @ao3575911
+/deny.toml @ao3575911
+/docs/ @ao3575911
+/brand/ @ao3575911
+/crates/ @ao3575911

@@ -1,0 +1,94 @@
+# Pull request path → label mapping (actions/labeler).
+# Keep label names in sync with .github/labels.yml.
+
+"area:cli":
+  - changed-files:
+      - any-glob-to-any-file:
+          - crates/glossa-cli/**
+
+"area:core":
+  - changed-files:
+      - any-glob-to-any-file:
+          - crates/glossa-core/**
+
+"area:io":
+  - changed-files:
+      - any-glob-to-any-file:
+          - crates/glossa-io/**
+
+"area:index":
+  - changed-files:
+      - any-glob-to-any-file:
+          - crates/glossa-index/**
+
+"area:nlp":
+  - changed-files:
+      - any-glob-to-any-file:
+          - crates/glossa-nlp/**
+
+"area:workspace":
+  - changed-files:
+      - any-glob-to-any-file:
+          - crates/glossa-workspace/**
+
+"area:tui":
+  - changed-files:
+      - any-glob-to-any-file:
+          - crates/glossa-tui/**
+
+"area:stats":
+  - changed-files:
+      - any-glob-to-any-file:
+          - crates/glossa-stats/**
+
+"area:plugin":
+  - changed-files:
+      - any-glob-to-any-file:
+          - crates/glossa-plugin/**
+
+"area:brand":
+  - changed-files:
+      - any-glob-to-any-file:
+          - brand/**
+
+"area:docs":
+  - changed-files:
+      - any-glob-to-any-file:
+          - docs/**
+          - "**/*.md"
+          - docs/wiki/**
+          - docs/pages/**
+
+"area:ci":
+  - changed-files:
+      - any-glob-to-any-file:
+          - .github/workflows/**
+          - .github/dependabot.yml
+          - dist-workspace.toml
+
+"area:security":
+  - changed-files:
+      - any-glob-to-any-file:
+          - SECURITY.md
+          - .github/codeql/**
+          - .github/workflows/security.yml
+          - deny.toml
+
+"type:docs":
+  - changed-files:
+      - any-glob-to-any-file:
+          - docs/**
+          - docs/wiki/**
+          - docs/pages/**
+          - "**/*.md"
+
+"type:ci":
+  - changed-files:
+      - any-glob-to-any-file:
+          - .github/workflows/**
+
+"pr:dependencies":
+  - changed-files:
+      - any-glob-to-any-file:
+          - "**/Cargo.lock"
+          - "**/Cargo.toml"

@@ -299,10 +299,7 @@ fn dispatch(
                 |d| {
                     brand::print_banner(brand::use_color(no_color));
                     println!();
-                    println!(
-                        "glossa {}",
-                        d["version"].as_str().unwrap_or("?")
-                    );
+                    println!("glossa {}", d["version"].as_str().unwrap_or("?"));
                     println!("{}", d["homepage"].as_str().unwrap_or(""));
                     println!("{}", d["repository"].as_str().unwrap_or(""));
                     println!("brand assets: brand/ (see brand/README.md)");

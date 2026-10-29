@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Architecture — Glossa</title>
+<link rel="stylesheet" href="../styles.css" />
+</head>
+<body>
+<div class="sheet">
+<p class="brand"><a href="../index.html" style="color:inherit;text-decoration:none">glossa</a></p>
+<h1>Architecture</h1>
+<p>High-level design (see <code>docs/07-build-spec.md</code> for the full specification).</p>
+<h2>Crates</h2>
+<table>
+<tr><th>Crate</th><th>Role</th></tr>
+<tr><td><code>glossa-cli</code></td><td>Binary (<code>glossa</code>)</td></tr>
+<tr><td><code>glossa-core</code></td><td>Result envelope / output mode</td></tr>
+<tr><td><code>glossa-workspace</code></td><td><code>init</code>, SQLite, session log</td></tr>
+<tr><td><code>glossa-io</code></td><td>Importers (TXT, HTML, DOCX, PDF text, CoNLL-U)</td></tr>
+<tr><td><code>glossa-nlp</code></td><td>UAX #29 tokeniser + sentence split</td></tr>
+<tr><td><code>glossa-index</code></td><td>Positional index + KWIC</td></tr>
+<tr><td><code>glossa-tui</code> / <code>glossa-stats</code> / <code>glossa-plugin</code></td><td>Stubs (later stages)</td></tr>
+</table>
+<h2>Data flow</h2>
+<pre><code>User → CLI/TUI → core → io / nlp / index / workspace
+                         ↓
+                   provenance envelope + session.jsonl</code></pre>
+<h2>Index sketch</h2>
+<p>Per attribute: FST vocabulary, <code>u32</code> token-id columns (memmap2), delta+varint postings, sentence/document boundaries, SHA-256 corpus hash.</p>
+<h2>Decisions</h2>
+<p>Accepted deviations live in <code>docs/decisions/</code>. Add a new ADR when changing intentional behaviour.</p>
+<footer><p><a href="Home.html">Wiki home</a> · <a href="../index.html">Site</a></p></footer>
+</div>
+</body>
+</html>

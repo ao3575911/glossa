@@ -1,0 +1,42 @@
+name: Performance
+description: Slow, memory-heavy, or scalability concern.
+title: "[perf] "
+labels: ["type:performance", "status:triage"]
+body:
+  - type: textarea
+    id: summary
+    attributes:
+      label: Summary
+    validations:
+      required: true
+  - type: textarea
+    id: workload
+    attributes:
+      label: Workload
+      description: Corpus size, command, flags, and hardware class if known.
+      placeholder: |
+        10M tokens, glossa kwic NODE --corpus large --context 8
+        Machine: 8-core CI-class / laptop
+    validations:
+      required: true
+  - type: textarea
+    id: measurements
+    attributes:
+      label: Measurements
+      description: Wall time, RSS, criterion output, or profiler notes.
+    validations:
+      required: true
+  - type: dropdown
+    id: area
+    attributes:
+      label: Area
+      options:
+        - index
+        - io
+        - nlp
+        - workspace
+        - cli
+        - tui
+        - unknown
+    validations:
+      required: true

@@ -61,8 +61,23 @@ fn extract_docx_text(xml: &str) -> IoResult<String> {
             }
             Ok(Event::Text(t)) => {
                 if in_t {
-                    let decoded = t.unescape().map_err(|e| IoError::Xml(e.to_string()))?;
+                    let decoded = t.decode().map_err(|e| IoError::Xml(e.to_string()))?;
                     out.push_str(&decoded);
+                }
+            }
+            Ok(Event::GeneralRef(r)) => {
+                if in_t {
+                    if let Some(ch) = r
+                        .resolve_char_ref()
+                        .map_err(|e| IoError::Xml(e.to_string()))?
+                    {
+                        out.push(ch);
+                    } else {
+                        let name = r.decode().map_err(|e| IoError::Xml(e.to_string()))?;
+                        if let Some(v) = quick_xml::escape::resolve_predefined_entity(&name) {
+                            out.push_str(v);
+                        }
+                    }
                 }
             }
             Ok(Event::Eof) => break,

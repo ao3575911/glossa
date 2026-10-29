@@ -4,7 +4,14 @@
 
 Offline-first linguistics CLI/TUI (`glossa`). Stage 0–1: workspaces, import, positional index, and KWIC.
 
-Brand assets (icon, logo, letterhead, GitHub social preview, terminal banner): [`brand/`](./brand/).
+| | |
+| --- | --- |
+| License | [MIT](./LICENSE) |
+| Contribute | [CONTRIBUTING.md](./CONTRIBUTING.md) |
+| Security | [SECURITY.md](./SECURITY.md) |
+| Support | [SUPPORT.md](./SUPPORT.md) |
+| Agents | [AGENTS.md](./AGENTS.md) |
+| Brand | [`brand/`](./brand/) |
 
 ## Install (dev)
 
@@ -91,9 +98,11 @@ cargo test --workspace
 cargo bench -p glossa-index --bench index_kwic
 ```
 
-CI: GitHub Actions on Ubuntu, macOS, and Windows (`fmt`, `clippy -D warnings`, `test`). Releases via cargo-dist (`dist-workspace.toml`).
+CI runs on Ubuntu, macOS, and Windows (`fmt`, `clippy -D warnings`, `test`). Security and quality jobs run `cargo-deny`, `cargo-audit`, and CodeQL. Releases use cargo-dist (`dist-workspace.toml`).
 
 ## Docs
+
+Product docs:
 
 1. [One-liner](docs/01-one-liner.md)
 2. [Definition](docs/02-definition.md)
@@ -103,6 +112,18 @@ CI: GitHub Actions on Ubuntu, macOS, and Windows (`fmt`, `clippy -D warnings`, `
 6. [PRD](docs/06-PRD.md)
 7. [Build plan / technical spec](docs/07-build-spec.md)
 8. [Recommended next prompt](docs/08-next-prompt.md)
+
+Operations:
+
+- [Wiki source](docs/wiki/Home.md) · [Projects board guide](docs/projects.md) · [GitHub Pages site](docs/pages/index.html)
+- Labels: [`.github/labels.yml`](.github/labels.yml) · Issue / Discussion / PR templates under [`.github/`](.github/)
+
+## Community
+
+- [Code of conduct](CODE_OF_CONDUCT.md)
+- [Contributing](CONTRIBUTING.md)
+- [Discussions](https://github.com/ao3575911/glossa/discussions) (enable in settings if the link 404s)
+- Issues use labelled templates (`type:*`, `area:*`, `status:triage`)
 
 ## License
 

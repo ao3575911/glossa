@@ -1,0 +1,71 @@
+name: Seed labelled issues
+
+on:
+  workflow_dispatch:
+    inputs:
+      dry_run:
+        description: "Print issues without creating them"
+        type: boolean
+        default: true
+
+permissions:
+  contents: read
+  issues: write
+
+concurrency:
+  group: seed-issues-${{ github.repository }}
+  cancel-in-progress: false
+
+jobs:
+  seed:
+    name: Create starter issues
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+        with:
+          persist-credentials: false
+
+      - name: Ensure labels exist
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          set -euo pipefail
+          # Minimal wait: label sync may have just run on main.
+          while IFS= read -r line; do
+            name=$(echo "$line" | sed -n 's/^- name: //p')
+            [ -z "$name" ] && continue
+            if ! gh label list --limit 200 --json name --jq '.[].name' | grep -Fxq "$name"; then
+              echo "Missing label: $name (run Labels workflow first)"
+            fi
+          done < .github/labels.yml
+
+      - name: Create issues from seed files
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          DRY_RUN: ${{ inputs.dry_run }}
+        run: |
+          set -euo pipefail
+          shopt -s nullglob
+          for file in .github/issue-seeds/*.md; do
+            title=$(sed -n 's/^title:[[:space:]]*//p' "$file" | head -1 | tr -d '"')
+            labels=$(sed -n 's/^labels:[[:space:]]*//p' "$file" | head -1 | tr -d '[]"')
+            body=$(awk 'BEGIN{p=0} /^---$/{c++; if(c==2){p=1; next}} p' "$file")
+            echo "==> $title"
+            echo "    labels: $labels"
+            if [ "$DRY_RUN" = "true" ]; then
+              echo "    (dry-run) skipping create"
+              continue
+            fi
+            # Skip if an open issue with the same title already exists
+            if gh issue list --state open --search "in:title \"$title\"" --json title --jq '.[].title' | grep -Fxq "$title"; then
+              echo "    already exists — skip"
+              continue
+            fi
+            label_args=()
+            IFS=',' read -ra parts <<< "$labels"
+            for raw in "${parts[@]}"; do
+              trimmed=$(echo "$raw" | xargs)
+              [ -n "$trimmed" ] && label_args+=(--label "$trimmed")
+            done
+            gh issue create --title "$title" --body "$body" "${label_args[@]}"
+          done
