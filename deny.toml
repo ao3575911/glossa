@@ -13,6 +13,9 @@ ignore = [
     # transitively by pdf-extract for font metrics; no maintained pdf-extract
     # release drops it yet. Revisit when pdf-extract migrates to skrifa.
     { id = "RUSTSEC-2026-0192", reason = "unmaintained transitive dep of pdf-extract; no vulnerability" },
+    # paste is archived (no known vulnerability); pulled in by ratatui.
+    # Revisit when ratatui drops it.
+    { id = "RUSTSEC-2024-0436", reason = "unmaintained transitive dep of ratatui; no vulnerability" },
 ]
 
 [licenses]
