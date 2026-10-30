@@ -1,144 +1,61 @@
 # Glossa
 
-**Glossa: every linguist's research tool, in one fast terminal workspace.**
+[![CI](https://github.com/ao3575911/glossa/actions/workflows/ci.yml/badge.svg)](https://github.com/ao3575911/glossa/actions/workflows/ci.yml)
+[![Security](https://github.com/ao3575911/glossa/actions/workflows/security.yml/badge.svg)](https://github.com/ao3575911/glossa/actions/workflows/security.yml)
+![Rust](https://img.shields.io/badge/rust-stable-orange)
+[![License: MIT](https://img.shields.io/badge/license-MIT-green)](LICENSE)
 
-Offline-first linguistics CLI/TUI (`glossa`). Stage 0–1: workspaces, import, positional index, and KWIC; Stage 4 MVP: ratatui full-screen UI.
+An offline corpus workbench for the terminal: import, index and read concordances fast.
 
-| | |
-| --- | --- |
-| License | [MIT](./LICENSE) |
-| Contribute | [CONTRIBUTING.md](./CONTRIBUTING.md) |
-| Security | [SECURITY.md](./SECURITY.md) |
-| Support | [SUPPORT.md](./SUPPORT.md) |
-| Agents | [AGENTS.md](./AGENTS.md) |
-| Brand | [`brand/`](./brand/) |
+![Import and KWIC from the CLI](docs/assets/glossa-cli.gif)
 
-## Install (dev)
+## Install
+
+Pre-release; build from source.
 
 ```bash
+git clone https://github.com/ao3575911/glossa && cd glossa
 cargo install --path crates/glossa-cli
-# or
-cargo run -p glossa-cli -- --help
 ```
 
-## Quick start
+## Quickstart
 
 ```bash
-# Create a workspace
-glossa init my-project
-cd my-project
-
-# Import a folder or file (TXT, HTML, DOCX, PDF text-layer, CoNLL-U)
-glossa corpus add ../tests/fixtures/corpus/alice_excerpt.txt --name alice \
-  --meta ../tests/fixtures/corpus/meta.csv
-
-glossa corpus ls
-glossa corpus info alice
-
-# Concordance (plain word, case-insensitive on lowercased forms)
-glossa kwic Alice --corpus alice --sort R1 --context 5 --limit 20
-
-# Regex over surface forms
-glossa kwic 'Rab+it' --regex --corpus alice
-
-# Machine-readable envelope (every command)
-glossa --version --json
-glossa kwic Alice --corpus alice --json
-
-# Branding (quiet by default; compact banner on request)
-glossa about
-GLOSSA_BANNER=1 glossa
+glossa init study && cd study
+glossa corpus add ../alice.txt --name alice     # TXT, HTML, DOCX, PDF text layer, CoNLL-U
+glossa kwic Rabbit --corpus alice --sort R1 --context 5 --limit 8
+glossa kwic 'Hatt[a-z]+' --regex --corpus alice
 ```
 
-## Terminal UI
+On *Alice's Adventures in Wonderland* (Project Gutenberg #11), import indexes 37,813 tokens and 1,806 sentences in under 0.1 s.
 
-From a workspace directory (or with `--workspace`), run the full-screen interface:
+## Common workflows
 
-```bash
-glossa tui
-# or simply (interactive terminal):
-glossa
-```
+**Read concordances in the TUI.** Run `glossa tui` (or bare `glossa`) in a workspace. Press `2` for Concordance, `/` to search, `j`/`k` to move, `s` to cycle sort (L1/R1/R2), `Ctrl+e` to export CSV, `q` to quit.
 
-Keyboard highlights: `Tab` / `1`–`4` switch panels (workspace, concordance, stats stub, session log); `i` / `:init` create a workspace; `a` / `:add <path>` import a corpus; `/` then query + `Enter` for KWIC; `j`/`k` move rows; `s` cycle sort (L1/R1/R2); `Ctrl+e` export KWIC CSV; `q` quit. Set `GLOSSA_NO_TUI=1` to disable auto-launch on bare `glossa`. Colours follow `brand/tokens.json`; honour `NO_COLOR`.
+![Concordance in the TUI](docs/assets/glossa-tui.gif)
 
-JSON results use a provenance envelope:
+**Script it.** Every command takes `--json` and returns a provenance envelope (version, params, corpus hash, timing). `--plain` gives screen-reader-friendly output.
 
-```json
-{
-  "glossa_version": "0.1.0",
-  "command": "kwic",
-  "params": { "...": "..." },
-  "corpus_hash": "...",
-  "model_hashes": {},
-  "started_at": "...",
-  "duration_ms": 12,
-  "data": { "...": "..." }
-}
-```
+**Attach metadata.** `glossa corpus add DIR --name NAME --meta meta.csv`, then `glossa corpus ls` and `glossa corpus info NAME`.
 
-Every command appends one line to `.glossa/session.jsonl`.
+## Concepts
 
-## Workspace layout
-
-```
-glossa.toml
-.glossa/
-  workspace.db      # SQLite metadata
-  session.jsonl     # append-only command log
-  corpora/<name>/   # manifest + columnar index
-```
-
-## Crates
-
-| Crate | Role |
-|---|---|
-| `glossa-cli` | Binary (`glossa`) |
-| `glossa-commands` | Shared init / corpus / KWIC logic (CLI + TUI) |
-| `glossa-tui` | Ratatui full-screen UI |
-| `glossa-core` | Result envelope / output mode |
-| `glossa-workspace` | `init`, SQLite, session log |
-| `glossa-io` | Importers |
-| `glossa-nlp` | UAX #29 tokeniser + sentence split |
-| `glossa-index` | Positional index + KWIC |
-| `glossa-stats` / `glossa-plugin` | Stubs (later stages) |
-
-## Development
-
-```bash
-cargo fmt --all -- --check
-cargo clippy --workspace --all-targets -- -D warnings
-cargo test --workspace
-cargo bench -p glossa-index --bench index_kwic
-```
-
-CI runs on Ubuntu, macOS, and Windows (`fmt`, `clippy -D warnings`, `test`). Security and quality jobs run `cargo-deny`, `cargo-audit`, and CodeQL. Releases use cargo-dist (`dist-workspace.toml`).
+- **Workspace**: a directory with `glossa.toml` and `.glossa/` (SQLite metadata, corpora, session log).
+- **Corpus**: imported documents with a content hash and a positional index.
+- **KWIC**: keyword in context; each hit with its left and right context, sortable by neighbouring words.
+- **Session log**: `.glossa/session.jsonl`, one line per command, for reproducibility.
 
 ## Docs
 
-Product docs:
+[Product docs](docs/) · [Build spec](docs/07-build-spec.md) · [Wiki source](docs/wiki/Home.md)
 
-1. [One-liner](docs/01-one-liner.md)
-2. [Definition](docs/02-definition.md)
-3. [Executive statement](docs/03-exec-statement.md)
-4. [Overview and comparison](docs/04-overview.md)
-5. [Vision and mission](docs/05-vision-mission.md)
-6. [PRD](docs/06-PRD.md)
-7. [Build plan / technical spec](docs/07-build-spec.md)
-8. [Recommended next prompt](docs/08-next-prompt.md)
+Sister project: [langSuite](https://github.com/ao3575911/langSuite) is the model-driven measurement lab (surprisal, embeddings, semantic change). Glossa is the corpus workbench.
 
-Operations:
+## Contributing
 
-- [Wiki source](docs/wiki/Home.md) · [Projects board guide](docs/projects.md) · [GitHub Pages site](docs/pages/index.html)
-- Labels: [`.github/labels.yml`](.github/labels.yml) · Issue / Discussion / PR templates under [`.github/`](.github/)
+See [CONTRIBUTING.md](CONTRIBUTING.md) and [AGENTS.md](AGENTS.md). Before a PR: `cargo fmt --all -- --check`, `cargo clippy --workspace --all-targets -- -D warnings`, `cargo test --workspace`. Security: [SECURITY.md](SECURITY.md).
 
-## Community
+## Licence
 
-- [Code of conduct](CODE_OF_CONDUCT.md)
-- [Contributing](CONTRIBUTING.md)
-- [Discussions](https://github.com/ao3575911/glossa/discussions) (enable in settings if the link 404s)
-- Issues use labelled templates (`type:*`, `area:*`, `status:triage`)
-
-## License
-
-MIT
+[MIT](LICENSE)
