@@ -15,7 +15,7 @@ glossa-commands = { workspace = true }
 glossa-core = { workspace = true }
 glossa-index = { workspace = true }
 glossa-workspace = { workspace = true }
-ratatui = "0.29"
+ratatui = "0.30"
 serde = { workspace = true }
 serde_json = { workspace = true }
 
