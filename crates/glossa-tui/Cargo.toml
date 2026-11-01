@@ -10,7 +10,7 @@ repository.workspace = true
 [dependencies]
 anyhow = { workspace = true }
 chrono = { workspace = true }
-crossterm = "0.28"
+crossterm = "0.29"
 glossa-commands = { workspace = true }
 glossa-core = { workspace = true }
 glossa-index = { workspace = true }
